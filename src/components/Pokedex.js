@@ -3,13 +3,17 @@ import ornament from '../assets/Group 216 (2).png'
 import logo from '../assets/image 11.png'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import PokemonCard from './PokemonCard';
 
 const Pokedex = () => {
   const name = useSelector(state => state.name)
   const [types, setTypes] = useState([])
+  const [pokemons, setPokemons] = useState()
   useEffect(() => {
     axios.get('https://pokeapi.co/api/v2/type')
       .then(res => setTypes(res.data.results))
+    axios.get('https://pokeapi.co/api/v2/pokemon')
+      .then(res => setPokemons(res.data.results))
   }, [])
   return (
     <div className='Pokedex'>
@@ -33,7 +37,11 @@ const Pokedex = () => {
         </select>
       </div>
       <div className='main'>
-        
+        {
+          pokemons?.map(pokemon => (
+            <PokemonCard link={pokemon.url}/>
+          ))
+        }
       </div>
     </div>
   );

@@ -131,3 +131,9 @@ body{
   color: #302F2F;
   border: none;
 }
+
+/*Card Pokemon*/
+.Card-pokemon{
+  width: 261px;
+  height: 383px;
+}
