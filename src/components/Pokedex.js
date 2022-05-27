@@ -18,19 +18,22 @@ const Pokedex = () => {
       <h2><span>Bienvenido {name}</span>, aqui podras encontar tu pokemon preferido</h2>
       <div className="search">
         <div className="search-for-name">
-          <input type="text" />
+          <input type="text" placeholder='Busca un pokemon' />
           <button>Buscar</button>
         </div>
         <select className='search-for-type'>
           <option value="all-pokemons">Todos los pokemones</option>
           {
             types.map(type => (
-              <option key={type.name}>
-                {type.name}
+              <option key={type.name} value={types.indexOf(type) + 1}>
+                {type.name} {types.indexOf(type)+1}
               </option>
             ))
           }
         </select>
+      </div>
+      <div className='main'>
+        
       </div>
     </div>
   );
