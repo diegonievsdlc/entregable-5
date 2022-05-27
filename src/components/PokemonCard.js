@@ -1,17 +1,56 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const PokemonCard = ({link}) => {
-  const [dataPokemon, setDataPokemon] = useState({})
+const PokemonCard = ({ link }) => {
+  const [dataPokemon, setDataPokemon] = useState({});
+  const [colorCard, setColorCard] = useState({});
   useEffect(() => {
-    axios.get(link)
-      .then(res => setDataPokemon(res.data))
-  }, [link])
+    axios.get(link).then((res) => setDataPokemon(res.data));
+    axios.get(dataPokemon.species?.url).then((res) => setColorCard(res.data));
+  }, [link, dataPokemon]);
   return (
-    <div className='Card-pokemon'>
-      <img src={dataPokemon.sprites?.other.home.front_default} alt="Pokemon" />
-      <h2>{dataPokemon.name}</h2>
-    </div>
+    <Link to={`/pokedex/${dataPokemon.id}`}>
+      <div
+        className="Card-pokemon"
+        style={{
+          background: colorCard.color?.name,
+          borderColor: colorCard.color?.name,
+        }}
+      >
+        <img
+          src={dataPokemon.sprites?.other.home.front_default}
+          alt="Pokemon"
+        />
+        <div className="poke-info">
+          <h2>{dataPokemon.name}</h2>
+          <ul className="types">
+            {dataPokemon.types?.map((type) => (
+              <li key={type.type.name}>{type.type.name}</li>
+            ))}
+          </ul>
+          <span>Tipo</span>
+          <ul className="poke-detail">
+            <li>
+              <h3>HP</h3>
+              <p>{dataPokemon.stats?.[0].base_stat}</p>
+            </li>
+            <li>
+              <h3>ATAQUE</h3>
+              <p>{dataPokemon.stats?.[1].base_stat}</p>
+            </li>
+            <li>
+              <h3>DEFENSA</h3>
+              <p>{dataPokemon.stats?.[2].base_stat}</p>
+            </li>
+            <li>
+              <h3>VELOCIDAD</h3>
+              <p>{dataPokemon.stats?.[5].base_stat}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Link>
   );
 };
 
