@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const submit = (e) => {
     e.preventDefault();
     dispatch(getName(name));
-    navigate('/pokedex')
+    navigate("/pokedex");
   };
   return (
     <div className="Home">
