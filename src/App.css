@@ -6,17 +6,21 @@
   list-style: none;
   box-sizing: border-box;
 }
-html {
-  width: 100%;
-  height: 100%;
+:root{
+  --color-body-: #e5e5e5;
+  --color-title-: #fe1936; 
+  --color-subtitle-: #302f2f;
+  --color-shadow-: rgba(0, 0, 0, 0.15);
 }
 body {
-  background-color: #e5e5e5;
+  background-color: var(--color-body-);
   font-family: "Inter", sans-serif;
-  transition: 2s;
+  transition: .35s;
 }
 body.dark{
-  background-color: #302f2f;
+  --color-body-: #302f2f;
+  --color-subtitle-: #fff;
+  --color-shadow-: gray;
 }
 /*Home*/
 .Home img {
@@ -40,11 +44,11 @@ body.dark{
   gap: 10px;
 }
 .Home > div h1 {
-  color: #fe1936;
+  color: var(--color-title-);
 }
 .Home > div h2 {
   font-size: 1rem;
-  color: #302f2f;
+  color: var(--color-subtitle-);
 }
 .Home > div form {
   width: 100%;
@@ -56,10 +60,12 @@ body.dark{
 }
 .Home > div form input {
   width: 100%;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 6px var(--color-shadow-);
   padding: 10px;
   border: none;
   outline: none;
+  background-color: var(--color-body-);
+  color: var(--color-subtitle-);
 }
 .Home > div form button {
   padding: 10px;
@@ -68,7 +74,7 @@ body.dark{
   border: none;
 }
 .ornament-home {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
 }
@@ -100,21 +106,13 @@ body.dark{
 .btn-settings:hover {
   animation: 0.35s rotate linear;
 }
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1turn);
-  }
-}
 /*Settings*/
 .btn-arrow {
   font-size: 2rem;
   position: fixed;
   top: 10px;
   left: 10px;
-  color: #302f2f;
+  color: var(--color-subtitle-);
 }
 .Settings {
   width: 100%;
@@ -123,12 +121,15 @@ body.dark{
   flex-direction: column;
   gap: 20px;
 }
+.Settings *{
+  color: var(--color-subtitle-);
+}
 .Settings > div {
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color-body-);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 6px var(--color-shadow-);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -139,7 +140,32 @@ body.dark{
   align-items: center;
   gap: 10px;
 }
-#checkbox {
+.lbl-settings{
+  display: inline-block;
+  width: 65px;
+  height: 33px;
+  background-color: var(--color-subtitle-);
+  border-radius: 100px;
+  cursor: pointer;
+  position: relative;
+}
+.lbl-settings::after{
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-color: var(--color-title-);
+  border-radius: 100px;
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  transition: .35s;
+
+}
+#switch:checked + .lbl-settings::after{
+  left: 35px;
+}
+#switch {
   display: none;
 }
 .setting-item-per-page select {
@@ -148,7 +174,15 @@ body.dark{
   border: none;
   outline: none;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-body-);
 }
+
+
+
+
+
+
+
 /*Pokedex*/
 .ornament-pokedex {
   width: 100%;
@@ -454,6 +488,15 @@ text-transform: capitalize;
 }
 .change-page button:focus {
   background-color: #d93f3f;
+}
+/*Keyframes*/
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 /*Responsive*/
