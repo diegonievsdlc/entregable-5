@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PokemonCard = ({ link }) => {
   const [dataPokemon, setDataPokemon] = useState({});
   const [colorCard, setColorCard] = useState({});
+  const navigate = useNavigate()
   useEffect(() => {
     axios.get(link).then((res) => setDataPokemon(res.data));
   }, [link]);
@@ -13,8 +14,11 @@ const PokemonCard = ({ link }) => {
       axios.get(dataPokemon.species?.url).then((res) => setColorCard(res.data));
     }
   }, [dataPokemon]);
+  const redirection = () => {
+    navigate(`/pokedex/${dataPokemon.id}`)
+  }
   return (
-    <Link to={`/pokedex/${dataPokemon.id}`}>
+    <button className="btn-card" onClick={redirection}>
       <div
         className="Card-pokemon"
         style={{
@@ -59,7 +63,7 @@ const PokemonCard = ({ link }) => {
           </ul>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 
