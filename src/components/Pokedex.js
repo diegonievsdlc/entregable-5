@@ -23,7 +23,7 @@ const Pokedex = () => {
       .then((res) => setPokemons(res.data.results));
   }, []);
   const search = () => {
-    navigate(`/pokedex/${pokeSearch}`);
+    navigate(`/pokedex/${pokeSearch.toLowerCase()}`);
   };
   const filterPokemons = (e) => {
     if(e.target.value === 'all-pokemons'){
@@ -57,18 +57,18 @@ const Pokedex = () => {
           preferido
         </h2>
         <div className="search">
-          <div className="search-for-name">
+          <form onSubmit={search} className="search-for-name">
             <input
               type="text"
               placeholder="Busca un pokemon"
               onChange={(e) => setPokeSearch(e.target.value)}
               value={pokeSearch}
             />
-            <button className="btn" onClick={search}>
+            <button className="btn">
               <span>Buscar</span>
               <i></i>
             </button>
-          </div>
+          </form>
           <select className="search-for-type" onChange={filterPokemons}>
             <option value="all-pokemons">Todos los pokemones</option>
             {types.map((type) => (

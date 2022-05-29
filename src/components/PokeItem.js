@@ -14,25 +14,30 @@ const PokeItem = () => {
       .then((res) => setPokeData(res.data));
   }, [id]);
   useEffect(() => {
-    if(pokeData?.species !== undefined){
+    if (pokeData?.species !== undefined) {
       axios.get(pokeData?.species.url).then((res) => setColorCard(res.data));
     }
-  }, [pokeData])
+  }, [pokeData]);
   return (
     <div className="Pokemon-item">
-      <Link className="btn-out" to={-1}><i className='bx bx-log-out-circle'></i></Link>
+      <Link className="btn-out" to={-1}>
+        <i className="bx bx-log-out-circle"></i>
+      </Link>
       <img className="ornament-pokedex" src={ornament} alt="Ornament" />
       <img className="logo-pokedex" src={logo} alt="Logo" />
       <div>
-
-
         <div className="Pokemon-detail">
-          <div style={{background: colorCard.color?.name}} className='Pokemon-detail-ornament'>
-            
-          <img src={pokeData?.sprites.other.dream_world.front_default} alt="Pokemon" />
+          <div
+            style={{ background: colorCard.color?.name }}
+            className="Pokemon-detail-ornament"
+          >
+            <img
+              src={pokeData?.sprites.other.dream_world.front_default}
+              alt="Pokemon"
+            />
           </div>
           <div className="Pokemon-detail-info">
-            <span>#{id}</span>
+            <span>#{pokeData?.id}</span>
             <h1>{pokeData?.name}</h1>
             <ul>
               <li>
@@ -47,36 +52,39 @@ const PokeItem = () => {
             <div className="type-and-skills">
               <section className="Pokemon-type">
                 <h2>Tipo</h2>
-                {pokeData?.types.map((type) => (
-                  <div key={type.type.name}>{type.type.name}</div>
-                ))}
+                <div>
+                  {pokeData?.types.map((type) => (
+                    <div key={type.type.name}>{type.type.name}</div>
+                  ))}
+                </div>
               </section>
               <section className="Pokemon-skills">
                 <h2>Habilidades</h2>
-                {
-                  pokeData?.abilities.map(ability => (
+                <div>
+                  {pokeData?.abilities.map((ability) => (
                     <div key={ability.ability.url}>{ability.ability.name}</div>
-                  ))
-                }
+                  ))}
+                </div>
               </section>
             </div>
             <div className="Pokemon-stats">
               <h2>Stats</h2>
               <ul>
-                
-              {
-                pokeData?.stats.map(stat => (
-                  <li key={stat.stat.name}>{stat.stat.name}<br/>
-                    <progress min="0" max="150" value={stat.base_stat}></progress>
+                {pokeData?.stats.map((stat) => (
+                  <li key={stat.stat.name}>
+                    {stat.stat.name}
+                    <br />
+                    <progress
+                      min="0"
+                      max="150"
+                      value={stat.base_stat}
+                    ></progress>
                   </li>
-                ))
-              }
+                ))}
               </ul>
             </div>
           </div>
         </div>
-
-
 
         <div className="Pokemon-movements">
           <h2>Movimientos</h2>
