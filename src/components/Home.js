@@ -27,7 +27,7 @@ const Home = () => {
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
-          <button>Comenzar</button>
+          <button className="btn"><span>COMENZAR</span><i></i></button>
         </form>
       </div>
       <img className="ornament-home" src={ornament} alt="Ornament" />

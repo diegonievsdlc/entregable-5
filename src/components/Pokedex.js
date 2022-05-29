@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ornament from "../assets/Group 216 (2).png";
 import logo from "../assets/image 11.png";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import PokemonCard from "./PokemonCard";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import PokemonCard from "./PokemonCard";
 import Pagination from "./Pagination";
 
 const Pokedex = () => {
   const name = useSelector((state) => state.name);
-  const item = useSelector((state) => state.item)
+  const item = useSelector((state) => state.item);
   const [types, setTypes] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [pokeSearch, setPokeSearch] = useState("");
@@ -26,18 +26,24 @@ const Pokedex = () => {
     navigate(`/pokedex/${pokeSearch}`);
   };
   const filterPokemons = (e) => {
-    axios.get(e.target.value).then((res) => setPokemons(res.data.pokemon));
-    setCurretPage(1)
+    if(e.target.value === 'all-pokemons'){
+      axios
+        .get("https://pokeapi.co/api/v2/pokemon")
+        .then((res) => setPokemons(res.data.results));
+    }else{
+      axios.get(e.target.value).then((res) => setPokemons(res.data.pokemon));
+    }
+    setCurretPage(1);
   };
   //Pagination
-  const [curretPage, setCurretPage] = useState(1)
-  const [cardsPerPage] = useState(item)
-  const indexOfLastCard = curretPage * cardsPerPage
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  const currentPosts = pokemons.slice(indexOfFirstCard, indexOfLastCard)
+  const [curretPage, setCurretPage] = useState(1);
+  const [cardsPerPage] = useState(item);
+  const indexOfLastCard = curretPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentPosts = pokemons.slice(indexOfFirstCard, indexOfLastCard);
   const paginate = (pageNumber) => {
-    setCurretPage(pageNumber)
-  }
+    setCurretPage(pageNumber);
+  };
   return (
     <div className="Pokedex">
       <Link className="btn-out" to={-1}>
@@ -58,7 +64,10 @@ const Pokedex = () => {
               onChange={(e) => setPokeSearch(e.target.value)}
               value={pokeSearch}
             />
-            <button onClick={search}>Buscar</button>
+            <button className="btn" onClick={search}>
+              <span>Buscar</span>
+              <i></i>
+            </button>
           </div>
           <select className="search-for-type" onChange={filterPokemons}>
             <option value="all-pokemons">Todos los pokemones</option>
@@ -78,9 +87,9 @@ const Pokedex = () => {
           />
         ))}
       </section>
-      <Pagination 
-        cardsPerPage={cardsPerPage} 
-        totalCards={pokemons.length} 
+      <Pagination
+        cardsPerPage={cardsPerPage}
+        totalCards={pokemons.length}
         paginate={paginate}
       />
     </div>

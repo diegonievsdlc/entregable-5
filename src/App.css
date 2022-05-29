@@ -11,6 +11,7 @@
   --color-title-: #fe1936; 
   --color-subtitle-: #302f2f;
   --color-shadow-: rgba(0, 0, 0, 0.15);
+  --color-text-: #416460;
 }
 body {
   background-color: var(--color-body-);
@@ -21,6 +22,7 @@ body.dark{
   --color-body-: #302f2f;
   --color-subtitle-: #fff;
   --color-shadow-: gray;
+  --color-text-: #fff;
 }
 /*Home*/
 .Home img {
@@ -67,11 +69,64 @@ body.dark{
   background-color: var(--color-body-);
   color: var(--color-subtitle-);
 }
-.Home > div form button {
+.btn {
+  position: relative;
   padding: 10px;
-  background-color: #d93f3f;
-  color: #fff;
+  color: #d93f3f;
   border: none;
+  transition: .5s;
+  letter-spacing: .1rem;
+}
+.btn:hover{
+  background-color: #d93f3f;
+  color: #d93f3f;
+  letter-spacing: .25rem;
+  box-shadow: 0 0 35px #d93f3f;
+}
+.btn::before{
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background-color: var(--color-body-);
+}
+.btn span{
+  position: relative;
+  z-index: 1;
+}
+.btn i{
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.btn i::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 10px;
+  height: 4px;
+  background: var(--color-body-);
+  transform: translateX(50%) skewX(325deg);
+  transition: .5s;
+}
+.btn:hover i::before{
+  width: 20px;
+  left: 10%;
+}
+.btn i::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 10px;
+  height: 4px;
+  background: var(--color-body-);
+  transform: translateX(50%) skewX(325deg);
+  transition: .5s;
+}
+.btn:hover i::after{
+  width: 20px;
+  left: 60%;
 }
 .ornament-home {
   position: fixed;
@@ -176,13 +231,6 @@ body.dark{
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   background-color: var(--color-body-);
 }
-
-
-
-
-
-
-
 /*Pokedex*/
 .ornament-pokedex {
   width: 100%;
@@ -225,6 +273,7 @@ body.dark{
 .Pokedex h2 {
   font-size: 1.2rem;
   text-align: center;
+  color: var(--color-subtitle-);
 }
 .Pokedex h2 span {
   color: #fe1936;
@@ -248,24 +297,22 @@ body.dark{
 }
 .search-for-name input {
   width: 100%;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 6px var(--color-shadow-);
   padding: 10px;
   border: none;
   outline: none;
-}
-.search-for-name button {
-  padding: 10px;
-  background-color: #d93f3f;
-  color: #fff;
-  border: none;
+  background-color: var(--color-body-);
+  color: var(--color-subtitle-);
 }
 .search-for-type {
   width: 100%;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 6px var(--color-shadow-);
   padding: 10px;
-  color: #302f2f;
+  color: var(--color-subtitle-);
+  background-color: var(--color-body-);
   border: none;
   text-transform: capitalize;
+  outline: none;
 }
 .main {
   display: grid;
@@ -278,10 +325,14 @@ body.dark{
 .Card-pokemon {
   width: 261px;
   height: 383px;
-  background-color: aqua;
   position: relative;
   border-radius: 5px;
   border: 7px solid;
+  transition: .35s;
+}
+.Card-pokemon:hover{
+  transform: scale(1.1);
+  z-index: 100;
 }
 .Card-pokemon > img {
   width: 70%;
@@ -291,7 +342,7 @@ body.dark{
   z-index: 10;
 }
 .poke-info {
-  background-color: white;
+  background-color: var(--color-body-);
   width: 100%;
   height: 247px;
   position: absolute;
@@ -302,13 +353,13 @@ body.dark{
 .poke-info h2 {
   text-transform: capitalize;
   font-size: 25px;
-  color: #416460;
+  color: var(--color-text-);
   font-weight: 400;
 }
 .types {
   display: flex;
   justify-content: center;
-  color: #416460;
+  color: var(--color-text-);
   gap: 10px;
 }
 .types li {
@@ -337,11 +388,14 @@ body.dark{
   text-align: center;
 }
 .poke-detail p {
-  color: #416460;
+  color: var(--color-text-);
   font-size: 1rem;
   text-align: center;
   font-weight: 700;
 }
+
+
+
 
 /*Pokemon Item*/
 .Pokemon-item > div {
@@ -467,6 +521,13 @@ text-transform: capitalize;
   display: inline-block;
   margin: 10px;
 }
+
+
+
+
+
+
+
 /*Pagination*/
 .change-page {
   width: 80%;
@@ -481,7 +542,8 @@ text-transform: capitalize;
   width: 20px;
   height: 20px;
   border: none;
-  background-color: none;
+  background-color: var(--color-body-);
+  border-radius: 20px;
 }
 .change-page button:hover {
   border: 1px solid #d93f3f;
