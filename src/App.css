@@ -316,6 +316,7 @@ body.dark{
   border: none;
   text-transform: capitalize;
   outline: none;
+  cursor: pointer;
 }
 .main {
   display: grid;
@@ -446,7 +447,6 @@ body.dark{
 }
 .Pokemon-detail-info h1{
 width: 268px;
-height: 43px;
 font-family: 'Roboto';
 font-weight: 500;
 font-size: 45px;
@@ -610,6 +610,9 @@ color: var(--color-text-);
   }
   .type-and-skills{
     flex-direction: row;
+  }
+  .Pokemon-detail-info h1{
+    width: auto;
   }
   ::-webkit-scrollbar {
     width: 10px;

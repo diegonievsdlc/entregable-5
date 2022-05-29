@@ -32,7 +32,12 @@ const PokeItem = () => {
             className="Pokemon-detail-ornament"
           >
             <img
-              src={pokeData?.sprites.other.dream_world.front_default}
+              src={
+                pokeData?.sprites.other.home.front_default ||
+                pokeData?.sprites.front_default ||
+                pokeData?.sprites.other["official-artwork"].front_default ||
+                pokeData?.sprites.versions["generation-viii"].icons.front_default
+              }
               alt="Pokemon"
             />
           </div>
@@ -89,9 +94,14 @@ const PokeItem = () => {
         <div className="Pokemon-movements">
           <h2>Movimientos</h2>
           <ul>
-            {pokeData?.moves.map((move) => (
-              <li key={move.move.name}>{move.move.name}</li>
-            ))}
+            {
+              pokeData?.moves !== undefined ? (
+                <h2>{pokeData?.name} no tiene movimientos para mostrar</h2>
+              ) : (
+              pokeData?.moves.map((move) => (
+                <li key={move.move.name}>{move.move.name}</li>
+              )))
+            }
           </ul>
         </div>
       </div>
