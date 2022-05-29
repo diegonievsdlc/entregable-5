@@ -36,7 +36,8 @@ const PokeItem = () => {
                 pokeData?.sprites.other.home.front_default ||
                 pokeData?.sprites.front_default ||
                 pokeData?.sprites.other["official-artwork"].front_default ||
-                pokeData?.sprites.versions["generation-viii"].icons.front_default
+                pokeData?.sprites.versions["generation-viii"].icons
+                  .front_default
               }
               alt="Pokemon"
             />
@@ -74,34 +75,53 @@ const PokeItem = () => {
             </div>
             <div className="Pokemon-stats">
               <h2>Stats</h2>
-              <ul>
+              <ul className="container">
                 {pokeData?.stats.map((stat) => (
-                  <li key={stat.stat.name}>
-                    {stat.stat.name}
-                    <br />
-                    <progress
-                      min="0"
-                      max="150"
-                      value={stat.base_stat}
-                    ></progress>
-                  </li>
+                  <div className="card" key={stat.stat.name}>
+                    <div className="box">
+                      <div className="percent">
+                        <svg>
+                          <circle cx="70" cy="70" r="70"></circle>
+                          <circle
+                            cx="70"
+                            cy="70"
+                            r="70"
+                            style={{
+                              strokeDashoffset: [
+                                `calc(440 - (440 * ${Math.floor(
+                                  (stat.base_stat * 100) / 150
+                                )}) / 100)`,
+                              ],
+                            }}
+                          ></circle>
+                        </svg>
+                        <div className="number">
+                          <h2>
+                            {Math.floor((stat.base_stat * 100) / 150)}
+                            <span>%</span>
+                          </h2>
+                        </div>
+                      </div>
+                      <h2 className="text">
+                        {stat.stat.name} <br /> {stat.base_stat} / 150
+                      </h2>
+                    </div>
+                  </div>
                 ))}
               </ul>
             </div>
           </div>
         </div>
-
         <div className="Pokemon-movements">
           <h2>Movimientos</h2>
           <ul>
-            {
-              pokeData?.moves !== undefined ? (
-                <h2>{pokeData?.name} no tiene movimientos para mostrar</h2>
-              ) : (
+            {pokeData?.moves.length === 0 ? (
+              <h2>{pokeData?.name} no tiene movimientos para mostrar</h2>
+            ) : (
               pokeData?.moves.map((move) => (
                 <li key={move.move.name}>{move.move.name}</li>
-              )))
-            }
+              ))
+            )}
           </ul>
         </div>
       </div>

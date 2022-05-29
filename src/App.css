@@ -428,7 +428,7 @@ body.dark{
   width: 100%;
   height: 70%;
   background-color: var(--container-color);
-  padding: 20px 50px;
+  padding: 20px 30px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -516,22 +516,133 @@ text-transform: capitalize;
 color: var(--color-text-);
 }
 .Pokemon-detail img {
-  width: 50%;
+  width: 60%;
   z-index: 20;
   position: absolute;
-  top: -80px;
+  top: -100px;
 }
 .Pokemon-stats{
   width: 100%;
   margin: 20px 0;
 }
-.Pokemon-stats *{
+.Pokemon-stats > h2{
   color: var(--color-subtitle-);
 }
-.Pokemon-stats ul{
+.Pokemon-stats .container{
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+.Pokemon-stats .container .card{
+  position: relative;
+  width: 200px;
+  height: 220px;
+  background: var(--color-body-);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  text-align: center;
+  overflow: hidden;
+  transition: .5s;
+}
+.Pokemon-stats .container .card:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .5);
+}
+.percent{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 50px #000;
+  background: #222;
+  z-index: 1000;
+}
+.percent .number{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.percent .number h2{
+  color: #777;
+  font-size: 40px;
+  transition: .5s;
+}
+.percent .number h2 span{
+  font-size: 24px;
+  color: #777;
+  transition: .5s;
+}
+
+.card:hover .percent .number h2{
+  color: #fff;
+  font-size: 50px;
+}
+.card:hover .percent .number h2 span{
+  color: #fff;
+}
+.text{
+  position: relative;
+  color: #777;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: .5s;
+  margin-top: 10px;
+}
+.card:hover .text{
+  color: #fff;
+}
+.Pokemon-stats svg{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  z-index: 1000;
+}
+.Pokemon-stats svg circle{
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #191919;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+.Pokemon-stats svg circle:nth-child(2){
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+}
+.card:nth-child(1) svg circle:nth-child(2){
+  stroke: #00ff43;
+  stroke-dashoffset: calc(440 - (440 * var(--porcent-)) / 100);
+}
+.card:nth-child(2) svg circle:nth-child(2){
+  stroke: rgb(253, 17, 17);
+}
+.card:nth-child(3) svg circle:nth-child(2){
+  stroke: rgba(136, 49, 49, 0.925);
+}
+.card:nth-child(4) svg circle:nth-child(2){
+  stroke: rgb(184, 10, 184);
+}
+.card:nth-child(5) svg circle:nth-child(2){
+  stroke: rgb(245, 245, 42);
+}
+.card:nth-child(6) svg circle:nth-child(2){
+  stroke: rgb(58, 58, 221);
+}
+
+
 
 .Pokemon-movements {
   width: 100%;
@@ -614,6 +725,10 @@ color: var(--color-text-);
   .Pokemon-detail-info h1{
     width: auto;
   }
+  .Pokemon-stats .container{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -665,16 +780,25 @@ color: var(--color-text-);
     padding: 10px 40px;
   }
   .Pokemon-item > div{
-    width: 80%;
+    width: 70%;
   }
   .Pokemon-detail img{
-    width: 20%;
-    top: -110px;
+    width: 30%;
+    top: -190px;
   }
   .type-and-skills > section > div{
     display: grid;
     grid-template-columns: repeat(2, auto);
     justify-content: center;
   align-items: center;
+  }
+  .Pokemon-stats{
+    width: 80%;
+  }
+  .Pokemon-stats > h2 {
+    font-size: 2rem;
+  }
+  .Pokemon-stats .container{
+    grid-template-columns: repeat(3, auto);
   }
 }
