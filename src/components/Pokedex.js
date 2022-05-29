@@ -14,23 +14,24 @@ const Pokedex = () => {
   const [pokemons, setPokemons] = useState([]);
   const [pokeSearch, setPokeSearch] = useState("");
   const navigate = useNavigate();
+  const getAllPokemons = () => {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1126")
+      .then((res) => setPokemons(res.data.results));
+  };
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/type")
       .then((res) => setTypes(res.data.results));
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon")
-      .then((res) => setPokemons(res.data.results));
+    getAllPokemons();
   }, []);
   const search = () => {
     navigate(`/pokedex/${pokeSearch.toLowerCase()}`);
   };
   const filterPokemons = (e) => {
-    if(e.target.value === 'all-pokemons'){
-      axios
-        .get("https://pokeapi.co/api/v2/pokemon")
-        .then((res) => setPokemons(res.data.results));
-    }else{
+    if (e.target.value === "all-pokemons") {
+      getAllPokemons();
+    } else {
       axios.get(e.target.value).then((res) => setPokemons(res.data.pokemon));
     }
     setCurretPage(1);
@@ -42,7 +43,15 @@ const Pokedex = () => {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentPosts = pokemons.slice(indexOfFirstCard, indexOfLastCard);
   const paginate = (pageNumber) => {
-    setCurretPage(pageNumber);
+    if (pageNumber === "next") {
+      curretPage === Math.floor(pokemons.length / cardsPerPage)
+        ? alert("No hay paginas adelante")
+        : setCurretPage(curretPage + 1);
+    } else {
+      curretPage === 1
+        ? alert("No hay paginas atras")
+        : setCurretPage(curretPage - 1);
+    }
   };
   return (
     <div className="Pokedex">
@@ -91,6 +100,8 @@ const Pokedex = () => {
         cardsPerPage={cardsPerPage}
         totalCards={pokemons.length}
         paginate={paginate}
+        curretPage={curretPage}
+        setCurretPage={setCurretPage}
       />
     </div>
   );
