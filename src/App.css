@@ -431,8 +431,9 @@ body.dark{
   align-items: center;
 }
 .Pokemon-detail-info > span{
-  width: 68px;
-  height: 44px;
+  min-width: 68px;
+  min-height: 44px;
+  padding: 5px;
   border: 1px solid #D3D3D3;
   font-size: 2rem;
   border-radius: 2px;
