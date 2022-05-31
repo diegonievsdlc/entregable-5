@@ -1,12 +1,23 @@
-import React from "react";
+import React from 'react';
 
-const Pagination = ({ cardsPerPage, totalCards, paginate, curretPage, setCurretPage }) => {
+const Pagination = ({cardsPerPage, totalCards, paginate, curretPage}) => {
+  const pageNumbers = []
+  for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
+    if(i < curretPage + 3 && i > curretPage - 3){
+      pageNumbers.push(i)
+    }
+  }
   return (
-    <div className="change-page">
-        <button onClick={() => paginate('prev')}><i className='bx bxs-left-arrow'></i> Prev</button>
-        <input type="text" value={curretPage} onChange={e => setCurretPage(e.target.value)}/>
-        <p>de {Math.floor(totalCards / cardsPerPage)}</p>
-        <button onClick={() => paginate('next')}>Next <i className='bx bxs-right-arrow' ></i></button>
+    <div className='change-page'>
+      {
+          pageNumbers.map(number => (
+              <button
+                  onClick={() => paginate(number)} 
+                  key={number}>
+                      {number}
+              </button>
+          ))
+      }
     </div>
   );
 };

@@ -706,7 +706,11 @@ color: var(--color-text-);
 
 
 
-
+.Error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /*Pagination*/
 .change-page {
   width: 80%;
@@ -718,8 +722,8 @@ color: var(--color-text-);
   margin: auto;
 }
 .change-page button {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border: none;
   background-color: var(--color-body-);
   border-radius: 20px;

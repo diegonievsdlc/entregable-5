@@ -43,15 +43,7 @@ const Pokedex = () => {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentPosts = pokemons.slice(indexOfFirstCard, indexOfLastCard);
   const paginate = (pageNumber) => {
-    if (pageNumber === "next") {
-      curretPage === Math.floor(pokemons.length / cardsPerPage)
-        ? alert("No hay paginas adelante")
-        : setCurretPage(curretPage + 1);
-    } else {
-      curretPage === 1
-        ? alert("No hay paginas atras")
-        : setCurretPage(curretPage - 1);
-    }
+    setCurretPage(pageNumber);
   };
   return (
     <div className="Pokedex">
@@ -75,7 +67,6 @@ const Pokedex = () => {
             />
             <button className="btn">
               <span>Buscar</span>
-              <i></i>
             </button>
           </form>
           <select className="search-for-type" onChange={filterPokemons}>
@@ -101,7 +92,6 @@ const Pokedex = () => {
         totalCards={pokemons.length}
         paginate={paginate}
         curretPage={curretPage}
-        setCurretPage={setCurretPage}
       />
     </div>
   );

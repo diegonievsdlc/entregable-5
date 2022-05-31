@@ -12,7 +12,7 @@ const Home = () => {
   const submit = (e) => {
     e.preventDefault();
     dispatch(getName(name));
-    navigate("/pokedex");
+      navigate("/pokedex");
   };
   return (
     <div className="Home">
